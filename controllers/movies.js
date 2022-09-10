@@ -1,4 +1,7 @@
 const Movie = require('../models/movie');
+const { NotFoundError } = require('../utils/errors/notFound');
+const { ForbiddenError } = require('../utils/errors/forbiddenError');
+const { BadRequestError } = require('../utils/errors/badRequestError');
 
 module.exports.getSavedMovies = (req, res, next) => {
   Movie.find({})

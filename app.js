@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const { usersRouter } = require('./routes/users');
 const { moviesRouter } = require('./routes/movies');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { handleError } = require('./middlewares/handleError');
+const { NotFoundError } = require('./utils/errors/notFound');
 
 const { PORT = 3000 } = process.env;
 
@@ -28,6 +30,8 @@ app.use((req, res, next) => {
 });
 
 app.use(errorLogger);
+
+app.use(handleError);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
