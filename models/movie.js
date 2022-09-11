@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const regexUrl = require('../utils/constatnts');
+const { regexUrl } = require('../utils/constatnts');
 
 const movieSchema = new mongoose.Schema({
   country: {

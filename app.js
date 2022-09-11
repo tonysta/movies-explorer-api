@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
-const { usersRouter } = require('./routes/users');
-const { moviesRouter } = require('./routes/movies');
+const usersRouter = require('./routes/users');
+const moviesRouter = require('./routes/movies');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { handleError } = require('./middlewares/handleError');
 const { NotFoundError } = require('./utils/errors/notFound');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
-const { PORT = 3000 } = process.env;
-
 const app = express();
+
+const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
