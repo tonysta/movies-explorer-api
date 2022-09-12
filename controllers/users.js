@@ -56,13 +56,7 @@ module.exports.getUser = (req, res, next) => {
       throw new NotFoundError('Такого пользователя не существует');
     })
     .then((user) => res.send(user))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Объект не найден или данные не валидны'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 module.exports.updateUser = (req, res, next) => {
