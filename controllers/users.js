@@ -57,7 +57,7 @@ module.exports.getUser = (req, res, next) => {
     })
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         next(new BadRequestError('Объект не найден или данные не валидны'));
       } else {
         next(err);
@@ -74,7 +74,9 @@ module.exports.updateUser = (req, res, next) => {
     })
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.code === 11000) {
+        next(new ConflictError('email уже используется'));
+      } else if (err.name === 'ValidationError') {
         next(new BadRequestError('Объект не найден или данные не валидны'));
       } else {
         next(err);
